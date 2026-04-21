@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PARKS Ingeniería | Manuales de Usuario</title>
+  <meta name="description" content="Portal de manuales y guías de uso de PARKS Ingeniería SA para clientes y usuarios.">
+  <link rel="icon" type="image/png" href="assets/branding/logo-parks.png">
+  <link rel="apple-touch-icon" href="assets/branding/logo-parks.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="inicio">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio del portal">
+        <span class="brand-visual" aria-hidden="true">
+          <span class="brand-mark">PK</span>
+          <img class="brand-logo" src="assets/branding/logo-parks.png" alt="" loading="eager" onload="this.style.display='block'; this.previousElementSibling.style.display='none';" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline-grid';">
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">PARKS Ingeniería</span>
+          <span class="brand-subtitle">Manuales de Usuario</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+        Menú
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal" data-main-nav>
+        <a href="#areas">Áreas</a>
+        <a href="#uso-portal">Cómo usar</a>
+        <a href="#guia-disponible">Guía disponible</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero hero-institutional">
+      <div class="container hero-layout">
+        <div class="hero-main">
+          <p class="eyebrow">Centro de ayuda y documentación</p>
+          <h1>Manuales de Usuario</h1>
+          <p class="hero-text">
+            Portal institucional para clientes y usuarios de PARKS Ingeniería SA. Reúne guías prácticas para comprender,
+            navegar y utilizar correctamente servicios, plataformas y herramientas con criterios claros de uso operativo.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#areas">Explorar áreas del portal</a>
+            <a class="btn btn-ghost" href="#uso-portal">Cómo usar este portal</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Qué encontrarás aquí">
+          <h2>Qué encontrarás aquí</h2>
+          <ul class="bullet-list">
+            <li>Manuales organizados por áreas funcionales.</li>
+            <li>Guías orientadas a clientes y usuarios finales.</li>
+            <li>Lectura clara para interpretación y aplicación práctica.</li>
+            <li>Navegación simple para consulta en desktop y móvil.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="areas">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Áreas del portal</h2>
+          <p>
+            El portal está organizado en cuatro áreas de servicio. Todas forman parte de la misma base documental,
+            con estados de disponibilidad claramente identificados.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="feature-card" aria-labelledby="area-clientes">
+            <div class="card-top">
+              <span class="area-symbol" aria-hidden="true">AC</span>
+              <span class="card-status status-soon">Próximamente</span>
+            </div>
+            <h3 id="area-clientes">Área de Clientes</h3>
+            <p>
+              Guías para consultas, navegación del área de clientes y operaciones de uso frecuente.
+            </p>
+          </article>
+
+          <article class="feature-card" aria-labelledby="area-powerbi">
+            <div class="card-top">
+              <div class="card-top-brand">
+                <span class="area-symbol" aria-hidden="true">BI</span>
+                <span class="powerbi-card-logo-shell">
+                  <img class="powerbi-card-logo" src="assets/branding/logo-power-bi.png" alt="Logo de Power BI" loading="lazy" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-grid';">
+                  <span class="powerbi-card-logo-fallback" aria-hidden="true">Power BI</span>
+                </span>
+              </div>
+              <span class="card-status status-available">Disponible</span>
+            </div>
+            <h3 id="area-powerbi">Power BI (Dashboard)</h3>
+            <p>
+              Manual general para comprender navegación, filtros e interpretación de dashboards.
+            </p>
+            <a class="card-link" href="power-bi.html">Ver manual</a>
+          </article>
+
+          <article class="feature-card" aria-labelledby="area-sgn">
+            <div class="card-top">
+              <span class="area-symbol" aria-hidden="true">SG</span>
+              <span class="card-status status-prep">En preparación</span>
+            </div>
+            <h3 id="area-sgn">Sistema de Gestión Naval (SGN)</h3>
+            <p>
+              Manuales operativos del SGN orientados a procesos y uso de plataforma.
+            </p>
+          </article>
+
+          <article class="feature-card" aria-labelledby="area-documental">
+            <div class="card-top">
+              <span class="area-symbol" aria-hidden="true">GD</span>
+              <span class="card-status status-soon">Próximamente</span>
+            </div>
+            <h3 id="area-documental">Gestión Documental</h3>
+            <p>
+              Guías para control documental, organización y gestión de archivos.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="uso-portal">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Cómo usar este portal</h2>
+          <p>
+            Ruta recomendada para aprovechar la documentación y aplicar cada guía de manera consistente.
+          </p>
+        </div>
+
+        <div class="usage-grid">
+          <article class="usage-card">
+            <p class="usage-step">01</p>
+            <h3>Explorar áreas</h3>
+            <p>Identifica el área funcional relacionada con tu necesidad operativa o consulta.</p>
+          </article>
+          <article class="usage-card">
+            <p class="usage-step">02</p>
+            <h3>Consultar guías</h3>
+            <p>Revisa la guía correspondiente y confirma contexto, filtros y alcance antes de interpretar.</p>
+          </article>
+          <article class="usage-card">
+            <p class="usage-step">03</p>
+            <h3>Aplicar en operación</h3>
+            <p>Utiliza el contenido como referencia de uso para una lectura correcta y decisiones mejor fundamentadas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="guia-disponible">
+      <div class="container guide-layout">
+        <div>
+          <h2>Power BI (Dashboard)</h2>
+          <p>
+            La guía de Power BI está disponible dentro del portal como manual general para usuarios que requieren
+            interpretar dashboards con criterios de navegación, filtros, visualizaciones y lectura técnica básica.
+          </p>
+          <a class="btn btn-primary" href="power-bi.html">Ver manual de Power BI</a>
+        </div>
+        <aside class="guide-panel" aria-label="Cobertura de la guía Power BI">
+          <h3>Qué cubre</h3>
+          <ul class="guide-list">
+            <li>Navegación del dashboard y orden de lectura.</li>
+            <li>Uso de filtros, periodos y validación de contexto.</li>
+            <li>Interpretación de KPIs, gráficos, tablas y mapas.</li>
+            <li>Buenas prácticas para evitar errores de interpretación.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>PARKS Ingeniería SA</p>
+      <p>Portal de manuales y guías de uso para clientes y usuarios.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" type="button" aria-label="Volver arriba" data-back-top>
+    ↑
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>

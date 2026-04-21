@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Power BI (Dashboard) | PARKS Ingeniería</title>
+  <meta name="description" content="Manual general de Power BI del portal de guías de PARKS Ingeniería SA.">
+  <link rel="icon" type="image/png" href="assets/branding/logo-parks.png">
+  <link rel="apple-touch-icon" href="assets/branding/logo-parks.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-power-bi">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="inicio">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio del portal">
+        <span class="brand-visual" aria-hidden="true">
+          <span class="brand-mark">PK</span>
+          <img class="brand-logo" src="assets/branding/logo-parks.png" alt="" loading="eager" onload="this.style.display='block'; this.previousElementSibling.style.display='none';" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline-grid';">
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">PARKS Ingeniería</span>
+          <span class="brand-subtitle">Manuales de Usuario</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+        Menú
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal" data-main-nav>
+        <a href="index.html">Inicio</a>
+        <a href="#indice">Índice</a>
+        <a href="#ruta-recomendada">Ruta recomendada</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero hero-doc">
+      <div class="container hero-content hero-content--powerbi">
+        <div>
+          <nav class="breadcrumbs" aria-label="Migas de pan">
+            <a href="index.html">PARKS Ingeniería</a>
+            <span aria-hidden="true">/</span>
+            <span>Manuales de Usuario</span>
+            <span aria-hidden="true">/</span>
+            <span>Power BI (Dashboard)</span>
+          </nav>
+          <h1>Power BI (Dashboard)</h1>
+          <p class="hero-text">
+            Esta guía forma parte del portal de manuales de PARKS Ingeniería SA y está orientada a clientes y usuarios que
+            necesitan comprender y utilizar correctamente reportes y dashboards Power BI en su operación diaria.
+          </p>
+        </div>
+        <aside class="powerbi-hero-brand" aria-label="Identidad visual de Power BI">
+          <div class="powerbi-logo-shell">
+            <img class="powerbi-logo" src="assets/branding/logo-power-bi.png" alt="Logo de Power BI" loading="eager" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-grid';">
+            <span class="powerbi-logo-fallback" aria-hidden="true">Power BI</span>
+          </div>
+          <p>Guía visual de lectura, filtros y análisis para dashboards Power BI.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section doc-layout" id="indice">
+      <div class="container doc-grid">
+        <aside class="doc-sidebar" aria-label="Índice interno">
+          <h2>Índice de contenidos</h2>
+          <nav class="doc-nav" aria-label="Navegación por secciones" data-doc-nav>
+            <a href="#introduccion">1. Introducción general</a>
+            <a href="#navegacion">2. Cómo navegar un dashboard</a>
+            <a href="#filtros">3. Uso de filtros y rango de fechas</a>
+            <a href="#interacciones-basicas">4. Interacciones básicas del dashboard</a>
+            <a href="#pestana-basico">5. Cómo leer la pestaña Básico</a>
+            <a href="#pestana-kpi">6. Cómo leer la pestaña KPI</a>
+            <a href="#pestana-co2">7. Cómo leer la pestaña CO₂</a>
+            <a href="#pestana-detectores-agua">8. Cómo leer la pestaña Detectores de agua</a>
+            <a href="#pestana-motores">9. Cómo leer la pestaña Motores</a>
+            <a href="#pestana-carga-motor">10. Cómo leer la pestaña Carga motor</a>
+            <a href="#pestana-tanques">11. Cómo leer la pestaña Tanques</a>
+            <a href="#pestana-tablas">12. Cómo leer la pestaña Tablas</a>
+            <a href="#pestana-comunicaciones">13. Cómo leer la pestaña Comunicaciones</a>
+            <a href="#buenas-practicas">14. Buenas prácticas de uso</a>
+            <a href="#ruta-recomendada">15. Secuencia recomendada de lectura</a>
+          </nav>
+        </aside>
+
+        <article class="doc-content">
+          <section class="content-block" aria-label="Parte 1 uso general">
+            <h2>Parte 1 — Uso general</h2>
+            <p>
+              Esta primera parte cubre navegación, filtros e interacciones para establecer una base de lectura correcta antes de analizar pestañas específicas.
+            </p>
+          </section>
+
+          <section class="content-block" id="introduccion">
+            <h2>1. Introducción general</h2>
+            <p>
+              Este manual está orientado a clientes y usuarios que necesitan interpretar dashboards Power BI de forma clara,
+              consistente y útil para su operación. El foco principal está en comprender cada pestaña del dashboard y su lectura recomendada.
+            </p>
+            <div class="callout callout-tip">
+              <h3>Enfoque de esta guía</h3>
+              <p>
+                Primero se cubre uso general del dashboard; luego se desarrolla una lectura por pestañas; al final se cierra con prácticas recomendadas.
+              </p>
+            </div>
+          </section>
+
+          <section class="content-block" id="navegacion">
+            <h2>2. Cómo navegar un dashboard</h2>
+            <p>
+              La navegación se organiza por pestañas. El uso recomendado comienza por una vista de contexto general y luego avanza
+              hacia pestañas específicas para profundizar el análisis.
+            </p>
+            <ul class="bullet-list">
+              <li>Ubica la pestaña activa antes de interpretar cualquier dato.</li>
+              <li>Mantén una secuencia de lectura estable para comparar periodos.</li>
+              <li>Valida hallazgos en más de una pestaña antes de cerrar una conclusión.</li>
+            </ul>
+
+            <div class="nav-three-bottom" aria-label="Referencia visual de navegación del dashboard">
+              <section class="nav-three-left">
+                <p class="nav-three-intro">
+                  Usa esta referencia como orientación rápida para ubicar el selector y confirmar el punto de lectura.
+                </p>
+                <h3>Qué identificar primero</h3>
+                <ul class="bullet-list nav-three-list">
+                  <li>Pestaña activa en el momento de análisis.</li>
+                  <li>Orden general de navegación entre secciones.</li>
+                  <li>Ubicación del selector dentro del dashboard.</li>
+                </ul>
+              </section>
+              <figure class="visual-slot nav-three-right" data-visual-slot>
+                <div class="visual-media-frame visual-media-frame--fit nav-three-image-frame"><img src="assets/power-bi/02-vista-general-dashboard/selector.png" alt="Referencia visual de vista general del dashboard" loading="eager" fetchpriority="high" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Vista general del dashboard</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div>
+              </figure>
+            </div>
+          </section>
+
+          <section class="content-block" id="filtros">
+            <h2>3. Uso de filtros y rango de fechas</h2>
+            <div class="filters-editorial">
+              <p class="filters-editorial-intro">
+                Los filtros definen el alcance de toda la información visible. Antes de interpretar indicadores, confirma siempre
+                el período principal y luego el rango específico dentro de ese período.
+              </p>
+
+              <section class="filters-editorial-block">
+                <h3>Qué debes saber primero</h3>
+                <ul class="bullet-list">
+                  <li>El filtro principal es <strong>Elija un periodo de análisis</strong>.</li>
+                  <li>El filtro <strong>Elija un rango de fechas</strong> depende completamente del período principal.</li>
+                  <li>El segundo filtro solo recorta el período principal; nunca lo amplía.</li>
+                </ul>
+              </section>
+
+              <section class="filters-meta-row" aria-label="Contexto y vigencia de los datos">
+                <div class="filters-meta-card">
+                  <h3>Disponibilidad de datos</h3>
+                  <p>
+                    La información disponible en el dashboard se encuentra registrada a partir de enero de 2026.
+                    En caso de requerir consultas correspondientes a períodos anteriores, puedes comunicarte con el equipo de soporte de PARKS Ingeniería.
+                  </p>
+                </div>
+                <div class="filters-meta-card">
+                  <h3>Última actualización</h3>
+                  <p>
+                    La fecha y hora de última actualización se usa como referencia de vigencia de los datos visibles en pantalla.
+                  </p>
+                </div>
+              </section>
+
+              <div class="callout callout-validate">
+                <h3>Nota de referencia visual</h3>
+                <p>
+                  La disponibilidad operativa actual del dashboard comienza en enero de 2026. Algunas capturas de esta guía se
+                  usan como referencia de interfaz y pueden mostrar rangos de ejemplo. Para consultas de información anterior o
+                  validación de disponibilidad histórica, comunícate con el soporte de PARKS Ingeniería.
+                </p>
+              </div>
+
+              <section class="filters-editorial-block">
+                <h3>Filtro 1 — Elija un periodo de análisis</h3>
+                <p>
+                  Este control establece la ventana base de análisis y define los límites máximos de fechas que podrás usar en el
+                  resto de la consulta.
+                </p>
+              </section>
+
+              <section class="filters-editorial-block">
+                <h3>Filtro 2 — Elija un rango de fechas</h3>
+                <p>
+                  Este control ajusta un subrango dentro de la ventana base definida por el Filtro 1 para focalizar la lectura.
+                </p>
+              </section>
+
+              <section class="filters-editorial-block">
+                <h3>Regla clave de dependencia entre ambos filtros</h3>
+                <p>
+                  El Filtro 2 no es independiente: solo opera dentro del período definido por el Filtro 1. No puede desbloquear ni
+                  seleccionar fechas por fuera de ese límite.
+                </p>
+              </section>
+
+              <section class="callout callout-focus">
+                <h3>Ejemplo práctico</h3>
+                <p>
+                  Si seleccionas <strong>Último + 2 + Semanas</strong>, el Filtro 2 solo permitirá elegir fechas dentro de esas dos
+                  semanas.
+                </p>
+              </section>
+            </div>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de filtros y rango de fechas">
+              <header class="visual-guide-header">
+                <h3>Filtros y rango de fechas</h3>
+                <p>Demostración interactiva para configurar el período base y definir el subrango de fechas antes de analizar cualquier indicador.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero confirma el período de análisis; luego valida el rango de fechas aplicado; después revisa filtros activos y última actualización; y finalmente interpreta indicadores con ese contexto. <strong>Orden sugerido de lectura:</strong> período, rango, filtros y vigencia.</p>
+              <section class="filter-simulator filter-simulator--embedded" aria-label="Simulador de filtros del dashboard" data-filter-simulator>
+                <div class="filter-toolbar">
+                  <section class="filter-period-group" aria-label="Selección de periodo">
+                    <h3>Elija un periodo de análisis</h3>
+                    <div class="filter-period-row">
+                      <select data-period-mode aria-label="Modo de periodo">
+                        <option value="last">Último</option>
+                        <option value="next">Siguiente</option>
+                        <option value="this">Este</option>
+                      </select>
+                      <input type="number" min="1" max="999" value="1" data-period-value aria-label="Cantidad de periodos">
+                      <select data-period-unit aria-label="Unidad temporal">
+                        <option value="days">Días</option>
+                        <option value="weeks" selected>Semanas</option>
+                        <option value="weeks-calendar">Semanas (calendario)</option>
+                        <option value="months">Meses</option>
+                        <option value="months-calendar">Meses (calendario)</option>
+                        <option value="years">Años</option>
+                        <option value="years-calendar">Años (calendario)</option>
+                      </select>
+                    </div>
+                    <p class="filter-period-result">
+                      <span aria-hidden="true">📅</span>
+                      <span data-period-display>15/04/2026 - 21/04/2026</span>
+                    </p>
+                  </section>
+
+                  <section class="filter-date-range-group" aria-label="Selección de rango de fechas">
+                    <h3>Elija un rango de fechas</h3>
+                    <div class="filter-date-inputs">
+                      <label>
+                        Inicio
+                        <input type="text" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" data-date-start aria-label="Fecha inicial en formato día mes año">
+                      </label>
+                      <label>
+                        Fin
+                        <input type="text" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" data-date-end aria-label="Fecha final en formato día mes año">
+                      </label>
+                    </div>
+                    <div class="filter-slider" data-slider>
+                      <div class="filter-slider-track" aria-hidden="true"></div>
+                      <div class="filter-slider-range" data-slider-range aria-hidden="true"></div>
+                      <input type="range" min="0" max="730" value="0" data-slider-start aria-label="Control deslizante fecha inicial">
+                      <input type="range" min="0" max="730" value="730" data-slider-end aria-label="Control deslizante fecha final">
+                    </div>
+                    <div class="filter-calendar" data-filter-calendar hidden>
+                      <div class="filter-calendar-header">
+                        <button type="button" data-cal-prev aria-label="Mes anterior">‹</button>
+                        <strong data-cal-title>abril 2026</strong>
+                        <button type="button" data-cal-next aria-label="Mes siguiente">›</button>
+                      </div>
+                      <div class="filter-calendar-weekdays" aria-hidden="true">
+                        <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                      </div>
+                      <div class="filter-calendar-grid" data-cal-grid></div>
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+          </section>
+
+          <section class="content-block" id="interacciones-basicas">
+            <h2>4. Interacciones básicas del dashboard</h2>
+            <p>
+              El dashboard permite interacciones que ayudan a explorar información sin perder contexto de lectura.
+            </p>
+            <ul class="bullet-list">
+              <li>Tooltip: muestra detalle adicional al pasar el cursor.</li>
+              <li>Selección en gráficos: permite enfocar subconjuntos de datos.</li>
+              <li>Filtrado cruzado: actualiza visualizaciones relacionadas según selección.</li>
+              <li>Navegación entre pestañas: cambia el enfoque del análisis sin cambiar la base del periodo.</li>
+            </ul>
+            <div class="callout callout-tech">
+              <h3>Uso recomendado</h3>
+              <p>
+                Aplica una interacción por vez y valida el cambio antes de continuar. Esto mejora la trazabilidad de la lectura.
+              </p>
+            </div>
+
+          </section>
+
+          <section class="content-block" aria-label="Parte 2 lectura por pestañas">
+            <h2>Parte 2 — Lectura por pestañas</h2>
+            <p>
+              Esta parte organiza el análisis por pestaña para que cada lectura tenga foco claro y sin mezcla de criterios.
+            </p>
+          </section>
+
+          <section class="content-block" id="pestana-basico">
+            <h2>5. Cómo leer la pestaña Básico</h2>
+            <p>
+              Esta pestaña es el punto de partida para la lectura general del dashboard. Su función es confirmar rápidamente el
+              contexto del período antes de avanzar a pestañas de mayor detalle.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> comprender panorama general antes de pasar a pestañas de detalle.</li>
+              <li><strong>Cómo se interpreta:</strong> revisa primero tendencia global y luego señales de desvío.</li>
+              <li><strong>Qué mirar primero:</strong> indicadores de resumen y variaciones principales.</li>
+              <li><strong>Qué datos suele mostrar:</strong> métricas agregadas, comparativos básicos y contexto temporal.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña Básico">
+              <header class="visual-guide-header">
+                <h3>Pestaña Básico</h3>
+                <p>Referencia visual para reconocer el resumen general y el punto de inicio recomendado de lectura.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero valida el bloque superior (filtros y última actualización); luego revisa las tarjetas de resumen visibles arriba; después observa los gráficos principales de tendencia; y recién baja a mayor detalle si necesitas profundizar. <strong>Primera lectura sugerida:</strong> contexto, síntesis y tendencia, en ese orden.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/05-basico/pestana_basico.png" alt="Referencia visual de pestaña Básico" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Básico</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-kpi">
+            <h2>6. Cómo leer la pestaña KPI</h2>
+            <p>
+              Esta pestaña permite comparar indicadores y desempeño según estado operativo, con foco en diferencias de consumo y
+              comportamiento entre motores.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> monitorear desempeño con señales numéricas resumidas.</li>
+              <li><strong>Cómo se interpreta:</strong> compara valores actuales contra tendencia y consistencia general.</li>
+              <li><strong>Qué mirar primero:</strong> indicadores principales y unidades de medida.</li>
+              <li><strong>Qué datos suele mostrar:</strong> KPIs agregados, variaciones y comparativas entre periodos.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña KPI">
+              <header class="visual-guide-header">
+                <h3>Pestaña KPI</h3>
+                <p>Referencia visual para reconocer indicadores principales, valores resumidos y lectura comparativa rápida.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> compara primero los estados operativos; luego revisa las tablas por motor; después contrasta barras y gráficos de consumo; y finalmente identifica diferencias entre comportamientos y niveles de operación. <strong>Orden sugerido de lectura:</strong> estados, tabla y contraste gráfico.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/06-kpi/pestana_kpi.png" alt="Referencia visual de pestaña KPI" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña KPI</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-co2">
+            <h2>7. Cómo leer la pestaña CO₂</h2>
+            <p>
+              Esta pestaña permite revisar emisiones dentro del período seleccionado y compararlas por tramo o unidad visible en
+              la tabla para validar su comportamiento.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> revisar desempeño asociado a emisiones.</li>
+              <li><strong>Cómo se interpreta:</strong> analiza tendencia y compara periodos equivalentes.</li>
+              <li><strong>Qué mirar primero:</strong> evolución temporal de indicadores de emisiones.</li>
+              <li><strong>Qué datos suele mostrar:</strong> series temporales y métricas comparativas de emisiones.</li>
+            </ul>
+
+            <section class="visual-guide-block visual-guide-block--compact-image" aria-label="Bloque visual de pestaña CO2">
+              <header class="visual-guide-header">
+                <h3>Pestaña CO₂</h3>
+                <p>Referencia visual para apoyar la lectura de evolución ambiental y su consistencia por periodo.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa filtros y período activo; después lee la tabla comparativa por tramo; luego observa el gráfico de emisiones por tramo; y finalmente contrasta si ambos reflejan un comportamiento coherente. <strong>Orden sugerido de lectura:</strong> contexto, tabla y contraste gráfico.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame visual-media-frame--adaptive"><img src="assets/power-bi/07-co2/pestana_co.png" alt="Referencia visual de pestaña CO2" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña CO₂</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-detectores-agua">
+            <h2>8. Cómo leer la pestaña Detectores de agua</h2>
+            <p>
+              Esta pestaña permite revisar el estado de los detectores y validar su comportamiento dentro del período
+              seleccionado.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> identificar eventos, estados y comportamiento de alertas.</li>
+              <li><strong>Cómo se interpreta:</strong> revisa ocurrencia, frecuencia y contexto temporal de eventos.</li>
+              <li><strong>Qué mirar primero:</strong> alertas activas o registros destacados del periodo.</li>
+              <li><strong>Qué datos suele mostrar:</strong> estados, eventos, recuentos y evolución temporal.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña Detectores de agua">
+              <header class="visual-guide-header">
+                <h3>Pestaña Detectores de agua</h3>
+                <p>Referencia visual para analizar eventos y estados de detección de agua dentro del periodo de análisis.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa el estado de alarmas o paneles visibles; después observa la distribución o agrupación por detector o grupo; luego valida el comportamiento temporal en los gráficos; y finalmente confirma si existe coherencia entre el estado visible y su evolución en el tiempo. <strong>Orden sugerido de lectura:</strong> estado, agrupación y validación temporal.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/08-detectores-de-agua/pestana_detectores.png" alt="Referencia visual de pestaña Detectores de agua" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Detectores de agua</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-motores">
+            <h2>9. Cómo leer la pestaña Motores</h2>
+            <p>
+              Esta pestaña permite revisar el comportamiento técnico de los motores y detectar patrones o desvíos dentro del
+              período activo.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> seguir desempeño técnico del sistema de motores.</li>
+              <li><strong>Cómo se interpreta:</strong> compara tendencias y detecta picos o caídas relevantes.</li>
+              <li><strong>Qué mirar primero:</strong> cambios de patrón en las variables principales.</li>
+              <li><strong>Qué datos suele mostrar:</strong> series técnicas, comparativos y variaciones por periodo.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña Motores">
+              <header class="visual-guide-header">
+                <h3>Pestaña Motores</h3>
+                <p>Referencia visual para observar estabilidad y comportamiento técnico de variables de motores.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa el estado general visible en la parte superior; después observa variables críticas como RPM, temperatura, presión y carga; luego contrasta el comportamiento entre motores; y finalmente identifica si existe coherencia general o posibles desvíos. <strong>Orden sugerido de lectura:</strong> estado general, variables críticas y contraste entre motores.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/09-motores/pestana_motores.png" alt="Referencia visual de pestaña Motores" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Motores</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-carga-motor">
+            <h2>10. Cómo leer la pestaña Carga motor</h2>
+            <p>
+              Esta pestaña permite revisar cómo se distribuye la carga del motor y cómo se relaciona con otras variables
+              operativas dentro del período activo.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> revisar distribución y evolución de carga en el periodo.</li>
+              <li><strong>Cómo se interpreta:</strong> compara tramos estables con variaciones críticas.</li>
+              <li><strong>Qué mirar primero:</strong> niveles de carga y cambios bruscos.</li>
+              <li><strong>Qué datos suele mostrar:</strong> niveles de carga, tendencias y variaciones por intervalo.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña Carga motor">
+              <header class="visual-guide-header">
+                <h3>Pestaña Carga motor</h3>
+                <p>Referencia visual para validar niveles de carga y variaciones en la operación analizada.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa la distribución por rangos de carga; después observa el resumen por motor; luego analiza los cruces entre carga, flow y temperatura; y finalmente confirma si el comportamiento general es coherente. <strong>Orden sugerido de lectura:</strong> distribución, resumen y correlación.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/10-carga-motor/pestana_carga_motor.png" alt="Referencia visual de pestaña Carga motor" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Carga motor</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-tanques">
+            <h2>11. Cómo leer la pestaña Tanques</h2>
+            <p>
+              Esta pestaña permite revisar la evolución general, niveles y remanencias, y comparar el comportamiento entre tanques
+              dentro del período activo.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> monitorear niveles y cambios relevantes en tanques.</li>
+              <li><strong>Cómo se interpreta:</strong> relaciona evolución de niveles con comportamiento del periodo.</li>
+              <li><strong>Qué mirar primero:</strong> diferencias entre puntos de control y tendencia general.</li>
+              <li><strong>Qué datos suele mostrar:</strong> niveles, variaciones y comparativos temporales.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña Tanques">
+              <header class="visual-guide-header">
+                <h3>Pestaña Tanques</h3>
+                <p>Referencia visual para revisar evolución de niveles y consistencia entre puntos de control.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa la tendencia general visible en la parte superior; después compara niveles o remanencias entre tanques; luego baja al detalle por unidad específica; y finalmente contrasta si el comportamiento mantiene coherencia general. <strong>Orden sugerido de lectura:</strong> tendencia, comparación y detalle por tanque.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/11-tanques/pestana_tanques.png" alt="Referencia visual de pestaña Tanques" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Tanques</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-tablas">
+            <h2>12. Cómo leer la pestaña Tablas</h2>
+            <p>
+              Esta pestaña está orientada a validar registros en detalle y contrastar esos datos con el comportamiento general
+              observado en las visualizaciones.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> verificar datos de detalle y contraste de resultados.</li>
+              <li><strong>Cómo se interpreta:</strong> revisa columnas clave y compara registros por fecha.</li>
+              <li><strong>Qué mirar primero:</strong> orden temporal, columnas principales y valores atípicos.</li>
+              <li><strong>Qué datos suele mostrar:</strong> filas de detalle, campos numéricos y datos de soporte analítico.</li>
+            </ul>
+
+            <section class="visual-guide-block" aria-label="Bloque visual de pestaña Tablas">
+              <header class="visual-guide-header">
+                <h3>Pestaña Tablas</h3>
+                <p>Referencia visual para validar lectura de registros, columnas clave y consistencia temporal.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa la tabla y sus columnas principales; luego identifica variaciones o diferencias por fila; después usa los gráficos inferiores como contraste visual; y finalmente confirma la coherencia general de los datos. <strong>Orden sugerido de lectura:</strong> tabla, variaciones y contraste gráfico.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame"><img src="assets/power-bi/12-tablas/pestana_tablas.png" alt="Referencia visual de pestaña Tablas" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Tablas</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" id="pestana-comunicaciones">
+            <h2>13. Cómo leer la pestaña Comunicaciones</h2>
+            <p>
+              Esta pestaña permite revisar continuidad, cobertura y disponibilidad de transmisión de datos, como base para validar
+              la confiabilidad del análisis en el resto del dashboard.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Para qué sirve:</strong> detectar interrupciones y evaluar disponibilidad de información.</li>
+              <li><strong>Cómo se interpreta:</strong> identifica ventanas con pérdida o discontinuidad de datos.</li>
+              <li><strong>Qué mirar primero:</strong> estado general de comunicación y periodos sin transmisión.</li>
+              <li><strong>Qué datos suele mostrar:</strong> estados de comunicación, continuidad temporal y eventos asociados.</li>
+            </ul>
+
+            <section class="visual-guide-block visual-guide-block--compact-image" aria-label="Bloque visual de pestaña Comunicaciones">
+              <header class="visual-guide-header">
+                <h3>Pestaña Comunicaciones</h3>
+                <p>Referencia visual para revisar continuidad de datos y su impacto en la lectura operativa.</p>
+              </header>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa el porcentaje de cobertura total; después observa el gráfico por fecha; luego confirma el detalle en la tabla; y finalmente identifica si existen días con menor continuidad o ausencia de datos. <strong>Orden sugerido de lectura:</strong> cobertura, tendencia y detalle por fecha.</p>
+              <div class="visual-slots visual-slots-single">
+                <figure class="visual-slot" data-visual-slot>
+                  <div class="visual-media-frame visual-media-frame--adaptive"><img src="assets/power-bi/13-comunicaciones/pestana_comunicaciones.png" alt="Referencia visual de pestaña Comunicaciones" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
+                  <div class="visual-placeholder">
+                    <p class="placeholder-title">Pestaña Comunicaciones</p>
+                    <p class="placeholder-file">Captura pendiente de integración</p>
+                    <p class="placeholder-note">Espacio preparado para una captura real del manual.</p>
+                  </div>
+                </div><figcaption>Referencia 1</figcaption>
+                  </figure>
+              </div>
+            </section>
+          </section>
+
+          <section class="content-block" aria-label="Parte 3 cierre">
+            <h2>Parte 3 — Cierre</h2>
+            <p>
+              Esta parte final resume prácticas recomendadas y propone una secuencia de lectura operativa.
+            </p>
+          </section>
+
+          <section class="content-block" id="buenas-practicas">
+            <h2>14. Buenas prácticas de uso</h2>
+            <ul class="bullet-list">
+              <li>Define filtros y rango de fechas antes de comenzar cualquier lectura.</li>
+              <li>Inicia en la pestaña Básico y luego recorre pestañas específicas según el objetivo.</li>
+              <li>Contrasta hallazgos entre KPIs, pestañas técnicas y tablas de detalle.</li>
+              <li>Valida continuidad de datos cuando encuentres variaciones no esperadas.</li>
+              <li>Evita conclusiones rápidas sin revisar tendencia temporal completa.</li>
+            </ul>
+            <div class="callout callout-tip">
+              <h3>Recomendación</h3>
+              <p>
+                Una lectura secuencial por pestañas mejora la interpretación y reduce errores de diagnóstico.
+              </p>
+            </div>
+          </section>
+
+          <section class="content-block" id="ruta-recomendada">
+            <h2>15. Secuencia recomendada de lectura</h2>
+            <p>
+              Para una lectura ordenada del dashboard, aplica este recorrido.
+            </p>
+            <ol class="bullet-list">
+              <li>Confirma filtros, rango de fechas y actualización visible.</li>
+              <li>Revisa la pestaña Básico para ubicar el contexto general.</li>
+              <li>Pasa a KPI para validar desempeño resumido.</li>
+              <li>Continúa con CO₂, Detectores, Motores, Carga motor y Tanques según necesidad de análisis.</li>
+              <li>Cierra con Tablas y Comunicaciones para validar consistencia final.</li>
+            </ol>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>PARKS Ingeniería SA</p>
+      <p>Portal de manuales y guías de uso para clientes y usuarios.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" type="button" aria-label="Volver arriba" data-back-top>
+    ↑
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
