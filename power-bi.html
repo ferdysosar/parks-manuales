@@ -318,14 +318,14 @@
           <section class="content-block" id="pestana-basico">
             <h2>5. Cómo leer la pestaña Básico</h2>
             <p>
-              Esta pestaña es el punto de partida para la lectura general del dashboard. Su función es confirmar rápidamente el
-              contexto del período antes de avanzar a pestañas de mayor detalle.
+              La pestaña Básico es la vista general del dashboard. Su función es dar una lectura rápida y ordenada del
+              comportamiento operativo dentro del período seleccionado, mostrando primero el contexto, luego los indicadores
+              principales y después el detalle resumido por sistemas.
             </p>
             <ul class="bullet-list">
-              <li><strong>Para qué sirve:</strong> comprender panorama general antes de pasar a pestañas de detalle.</li>
-              <li><strong>Cómo se interpreta:</strong> revisa primero tendencia global y luego señales de desvío.</li>
-              <li><strong>Qué mirar primero:</strong> indicadores de resumen y variaciones principales.</li>
-              <li><strong>Qué datos suele mostrar:</strong> métricas agregadas, comparativos básicos y contexto temporal.</li>
+              <li><strong>Qué período se está analizando:</strong> define el marco temporal de toda la lectura.</li>
+              <li><strong>Qué contexto operativo se observa:</strong> recorrido, distancia, consumo y comportamiento general.</li>
+              <li><strong>Qué revisar después:</strong> propulsores, generadores, carga de barcaza, tanques y velocidad promedio.</li>
             </ul>
 
             <section class="visual-guide-block" aria-label="Bloque visual de pestaña Básico">
@@ -333,7 +333,7 @@
                 <h3>Pestaña Básico</h3>
                 <p>Referencia visual para reconocer el resumen general y el punto de inicio recomendado de lectura.</p>
               </header>
-              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero valida el bloque superior (filtros y última actualización); luego revisa las tarjetas de resumen visibles arriba; después observa los gráficos principales de tendencia; y recién baja a mayor detalle si necesitas profundizar. <strong>Primera lectura sugerida:</strong> contexto, síntesis y tendencia, en ese orden.</p>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero confirma filtros, rango y última actualización; después revisa mapa y tarjetas resumen; luego analiza propulsores, generadores y tanques para contrastar consumo, distancia, carga y velocidad dentro del período seleccionado.</p>
               <div class="visual-slots visual-slots-single">
                 <figure class="visual-slot" data-visual-slot>
                   <div class="visual-media-frame"><img src="assets/power-bi/05-basico/pestana_basico.png" alt="Referencia visual de pestaña Básico" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
@@ -346,6 +346,104 @@
                   </figure>
               </div>
             </section>
+
+            <h3>Mapa y resumen general</h3>
+            <p>El mapa aporta contexto espacial del período y debe leerse junto con distancia recorrida, velocidad promedio y consumos.</p>
+            <div class="module-grid">
+              <article class="module-card">
+                <h4>Consumo Total Propulsores</h4>
+                <p>Consumo total acumulado de los propulsores durante el período seleccionado.</p>
+              </article>
+              <article class="module-card">
+                <h4>Consumo Total Generadores</h4>
+                <p>Consumo total acumulado de los generadores dentro del período analizado.</p>
+              </article>
+              <article class="module-card">
+                <h4>Consumo Total Caudalímetros</h4>
+                <p>Total registrado por los caudalímetros en el período seleccionado.</p>
+              </article>
+              <article class="module-card">
+                <h4>Carga Barcaza</h4>
+                <p>Indica la cantidad de carga registrada para la barcaza dentro del período seleccionado.</p>
+                <p>Este valor ayuda a relacionar consumo y operación con el movimiento o carga transportada, para completar la carga en caso de que sea necesario.</p>
+              </article>
+              <article class="module-card">
+                <h4>Carga de Búnker</h4>
+                <p>Muestra la carga de combustible registrada en el período para identificar abastecimientos o reposiciones.</p>
+              </article>
+              <article class="module-card">
+                <h4>Consumo Total Tanques</h4>
+                <p>Consumo total asociado al sistema de tanques en el período visible.</p>
+              </article>
+              <article class="module-card">
+                <h4>Velocidad Promedio (km/h)</h4>
+                <p>Velocidad promedio del período para contextualizar comportamiento operativo, distancia y consumo.</p>
+              </article>
+              <article class="module-card">
+                <h4>Distancia Recorrida (km)</h4>
+                <p>Distancia total recorrida durante el período seleccionado.</p>
+              </article>
+              <article class="module-card">
+                <h4>Consumo Tanque Diario</h4>
+                <p>Resumen del consumo diario asociado a tanques dentro de la ventana de análisis.</p>
+              </article>
+            </div>
+
+            <h3>Propulsores</h3>
+            <p>Este bloque resume el comportamiento por posición: Babor, Central y Estribor.</p>
+            <p><strong>Lectura recomendada:</strong> caudal, consumo acumulado, RPM, horas máquina y contraste con gráficos temporales.</p>
+            <ul class="bullet-list">
+              <li><strong>Caudal Promedio Propulsor Babor / Central / Estribor (L/h):</strong> demanda promedio por hora de cada unidad.</li>
+              <li><strong>Consumo Acumulado Propulsor Babor / Central / Estribor (L):</strong> total consumido por cada propulsor.</li>
+              <li><strong>RPM Promedio Propulsor Babor / Central / Estribor (rpm):</strong> intensidad promedio de uso por unidad.</li>
+              <li><strong>HM Relativa Propulsor Babor / Central / Estribor (h):</strong> tiempo relativo de funcionamiento de cada unidad.</li>
+              <li><strong>Gráficos asociados:</strong> ayudan a identificar picos, comparar comportamiento y validar coherencia entre actividad y consumo.</li>
+            </ul>
+
+            <h3>Generadores</h3>
+            <p>Resume el comportamiento de Generador 1, Generador 2 y Generador Auxiliar.</p>
+            <p><strong>Lectura recomendada:</strong> caudal promedio, consumo acumulado, comparación entre unidades y validación temporal en el gráfico.</p>
+            <ul class="bullet-list">
+              <li><strong>Caudal Promedio Generador 1 / 2 / Aux (L/h):</strong> demanda media por hora de cada generador.</li>
+              <li><strong>Consumo Acumulado Generador 1 / 2 / Aux (L):</strong> total acumulado por unidad.</li>
+              <li><strong>Gráfico del bloque:</strong> permite detectar actividad, comparar generadores y validar consistencia con los acumulados.</li>
+            </ul>
+
+            <h3>Carga barcaza</h3>
+            <p><strong>Carga Barcaza (L):</strong> muestra la carga registrada en el período seleccionado para identificar operaciones de carga.</p>
+            <p><strong>Gráfico asociado:</strong> representa la evolución temporal de esa carga y ayuda a detectar variaciones relevantes.</p>
+
+            <h3>Tanques diarios</h3>
+            <p>Resume el comportamiento diario del sistema de tanques para contrastar carga y consumo.</p>
+            <ul class="bullet-list">
+              <li><strong>Carga Acumulada TK Diario (L):</strong> volumen diario incorporado al sistema de tanques.</li>
+              <li><strong>Consumo Acumulado TK Diario (L):</strong> consumo diario acumulado de tanque.</li>
+              <li><strong>Gráfico asociado:</strong> permite validar tendencias y coherencia entre acumulados y evolución temporal.</li>
+            </ul>
+
+            <h3>Velocidad promedio</h3>
+            <p><strong>Velocidad Promedio (km/h):</strong> complementa la lectura de distancia recorrida, recorrido y consumo.</p>
+            <p><strong>Gráfico asociado:</strong> ayuda a detectar estabilidad, cambios bruscos, tramos con actividad o períodos sin desplazamiento.</p>
+
+            <div class="callout callout-tech">
+              <h3>Orden sugerido de lectura</h3>
+              <ol class="bullet-list">
+                <li>Confirmar período, rango de fechas y última actualización.</li>
+                <li>Revisar mapa y tarjetas resumen generales.</li>
+                <li>Analizar el bloque de propulsores.</li>
+                <li>Revisar el bloque de generadores.</li>
+                <li>Confirmar si hubo carga de barcaza.</li>
+                <li>Revisar tanques diarios.</li>
+                <li>Cerrar con velocidad promedio y su comportamiento temporal.</li>
+              </ol>
+            </div>
+
+            <h3>Qué aporta esta pestaña</h3>
+            <p>
+              Esta vista permite responder, en una sola pantalla, cuánto se consumió, cuánto se recorrió, cómo se comportaron
+              propulsores y generadores, si hubo cargas operativas, cómo evolucionaron los tanques y cuál fue la velocidad promedio
+              del período.
+            </p>
           </section>
 
           <section class="content-block" id="pestana-kpi">

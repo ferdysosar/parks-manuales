@@ -1050,6 +1050,45 @@ h3 {
   margin-top: 0.45rem;
 }
 
+#pestana-basico > h3 {
+  margin-top: 1.45rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.28;
+}
+
+#pestana-basico > p {
+  margin-bottom: 0.7rem;
+}
+
+#pestana-basico .visual-guide-block {
+  margin-bottom: 1.2rem;
+}
+
+#pestana-basico .callout {
+  margin-top: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+#pestana-basico .module-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+#pestana-basico .module-card {
+  padding: 1rem 1.05rem;
+  min-height: 0;
+}
+
+#pestana-basico .module-card h4 {
+  margin: 0 0 0.4rem;
+  line-height: 1.3;
+}
+
+#pestana-basico .module-card p {
+  margin: 0.35rem 0 0;
+}
+
 .visual-guide-block {
   margin-top: 1.15rem;
   border: 1px solid #c4d3e2;
