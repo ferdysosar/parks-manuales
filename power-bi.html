@@ -515,14 +515,13 @@
           <section class="content-block" id="pestana-detectores-agua">
             <h2>8. Cómo leer la pestaña Detectores de agua</h2>
             <p>
-              Esta pestaña permite revisar el estado de los detectores y validar su comportamiento dentro del período
-              seleccionado.
+              La pestaña Detectores de agua permite revisar el estado de los detectores asociados al sistema y verificar si hubo
+              señales de presencia de agua durante el período seleccionado.
             </p>
             <ul class="bullet-list">
-              <li><strong>Para qué sirve:</strong> identificar eventos, estados y comportamiento de alertas.</li>
-              <li><strong>Cómo se interpreta:</strong> revisa ocurrencia, frecuencia y contexto temporal de eventos.</li>
-              <li><strong>Qué mirar primero:</strong> alertas activas o registros destacados del periodo.</li>
-              <li><strong>Qué datos suele mostrar:</strong> estados, eventos, recuentos y evolución temporal.</li>
+              <li><strong>Qué valida primero:</strong> si existe o no una alarma de detección de agua.</li>
+              <li><strong>Qué confirma después:</strong> detector, grupo o sector asociado al estado observado.</li>
+              <li><strong>Qué contrasta al final:</strong> historial temporal de detecciones en los gráficos inferiores.</li>
             </ul>
 
             <section class="visual-guide-block" aria-label="Bloque visual de pestaña Detectores de agua">
@@ -530,7 +529,7 @@
                 <h3>Pestaña Detectores de agua</h3>
                 <p>Referencia visual para analizar eventos y estados de detección de agua dentro del periodo de análisis.</p>
               </header>
-              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa el estado de alarmas o paneles visibles; después observa la distribución o agrupación por detector o grupo; luego valida el comportamiento temporal en los gráficos; y finalmente confirma si existe coherencia entre el estado visible y su evolución en el tiempo. <strong>Orden sugerido de lectura:</strong> estado, agrupación y validación temporal.</p>
+              <p class="visual-guide-focus"><strong>Qué mirar aquí:</strong> primero revisa si existe una alarma visible; después identifica el detector o grupo asociado; finalmente valida en los gráficos inferiores si hubo detecciones de agua y en qué momento aparecen dentro de la línea de tiempo.</p>
               <div class="visual-slots visual-slots-single">
                 <figure class="visual-slot" data-visual-slot>
                   <div class="visual-media-frame"><img src="assets/power-bi/08-detectores-de-agua/pestana_detectores.png" alt="Referencia visual de pestaña Detectores de agua" loading="eager" onload="this.closest('[data-visual-slot]').classList.add('is-loaded')" onerror="this.closest('[data-visual-slot]').classList.remove('is-loaded')">
@@ -543,6 +542,96 @@
                   </figure>
               </div>
             </section>
+
+            <h3>Qué es esta pestaña</h3>
+            <p>
+              Su función principal es ayudar a identificar si existe una alarma activa o si hubo detecciones registradas en el
+              tiempo. Es una vista de validación de estado y seguimiento temporal.
+            </p>
+
+            <div class="callout callout-warn">
+              <h3>Qué busca detectar esta pestaña</h3>
+              <p>
+                Lo más importante en esta pestaña es detectar si hay agua en los tanques. Cuando existe una detección de agua, es
+                ahí cuando se prende la alarma.
+              </p>
+            </div>
+
+            <h3>Cómo está organizada</h3>
+            <ol class="bullet-list">
+              <li>Revisar el estado general de alarmas o paneles visibles.</li>
+              <li>Observar la agrupación o distribución por detector o grupo.</li>
+              <li>Validar en los gráficos inferiores si hubo detecciones dentro del período.</li>
+              <li>Confirmar coherencia entre paneles y línea de tiempo.</li>
+            </ol>
+
+            <h3>Paneles o tarjetas de estado</h3>
+            <p>
+              Los paneles visibles permiten verificar rápidamente si existe o no una condición de alarma asociada a los
+              detectores.
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Estado normal:</strong> indica ausencia de detección visible en ese momento o dentro del estado mostrado.</li>
+              <li><strong>Estado con alarma:</strong> debe interpretarse como advertencia de detección de agua en el sistema o punto correspondiente.</li>
+            </ul>
+
+            <h3>Qué significa una alarma</h3>
+            <p>
+              Una alarma en esta pestaña debe interpretarse como una señal de detección de agua. No debe leerse de forma aislada:
+              si aparece, se contrasta con el historial temporal de los gráficos inferiores.
+            </p>
+
+            <h3>Cómo leer la agrupación o distribución</h3>
+            <p>
+              La agrupación o distribución ayuda a identificar en qué detector, grupo o sector se concentra el estado observado y
+              permite pasar de una lectura general a una lectura más específica.
+            </p>
+
+            <h3>Cómo leer los gráficos temporales</h3>
+            <p>
+              Los gráficos de abajo muestran el historial de las detecciones de agua. Si hubo una detección de agua, se va a
+              mostrar en esa línea de tiempo.
+            </p>
+            <ul class="bullet-list">
+              <li>Permiten ver en qué momento ocurrió la detección.</li>
+              <li>Ayudan a identificar si fue un evento puntual o repetido.</li>
+              <li>Permiten validar continuidad o ausencia de eventos.</li>
+              <li>Sirven para contrastar si el comportamiento temporal coincide con el estado general de arriba.</li>
+            </ul>
+            <p>
+              Si no hubo detecciones, la línea de tiempo también funciona como confirmación visual de ausencia de eventos durante
+              el período seleccionado.
+            </p>
+
+            <div class="callout callout-tech">
+              <h3>Qué hacer si aparece una detección</h3>
+              <ol class="bullet-list">
+                <li>Confirmar período activo y última actualización.</li>
+                <li>Identificar detector o grupo afectado.</li>
+                <li>Revisar en qué momento ocurrió la detección.</li>
+                <li>Validar si fue un evento aislado o repetido.</li>
+                <li>Escalar la validación según el procedimiento operativo de PARKS Ingeniería, si corresponde.</li>
+              </ol>
+            </div>
+
+            <div class="callout callout-focus">
+              <h3>Orden sugerido de lectura</h3>
+              <ol class="bullet-list">
+                <li>Confirmar filtros, período y última actualización.</li>
+                <li>Revisar estado general de los detectores.</li>
+                <li>Identificar si existe una alarma activa.</li>
+                <li>Observar agrupación o distribución por detector o grupo.</li>
+                <li>Revisar gráficos inferiores como historial de detecciones.</li>
+                <li>Confirmar coherencia entre lectura general y línea de tiempo.</li>
+              </ol>
+            </div>
+
+            <h3>Qué aporta esta pestaña</h3>
+            <p>
+              Esta vista permite responder rápidamente si hubo o no detección de agua durante el período visible, dónde se
+              concentra el estado observado y cómo se comportó esa detección en el tiempo.
+            </p>
+            <p>En resumen, es una pestaña de validación de alarmas y seguimiento histórico de detecciones.</p>
           </section>
 
           <section class="content-block" id="pestana-motores">

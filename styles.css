@@ -1050,42 +1050,50 @@ h3 {
   margin-top: 0.45rem;
 }
 
-#pestana-basico > h3 {
+#pestana-basico > h3,
+#pestana-detectores-agua > h3 {
   margin-top: 1.45rem;
   margin-bottom: 0.5rem;
   line-height: 1.28;
 }
 
-#pestana-basico > p {
+#pestana-basico > p,
+#pestana-detectores-agua > p {
   margin-bottom: 0.7rem;
 }
 
-#pestana-basico .visual-guide-block {
+#pestana-basico .visual-guide-block,
+#pestana-detectores-agua .visual-guide-block {
   margin-bottom: 1.2rem;
 }
 
-#pestana-basico .callout {
+#pestana-basico .callout,
+#pestana-detectores-agua .callout {
   margin-top: 1rem;
   margin-bottom: 1.1rem;
 }
 
-#pestana-basico .module-grid {
+#pestana-basico .module-grid,
+#pestana-detectores-agua .module-grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
   align-items: start;
 }
 
-#pestana-basico .module-card {
+#pestana-basico .module-card,
+#pestana-detectores-agua .module-card {
   padding: 1rem 1.05rem;
   min-height: 0;
 }
 
-#pestana-basico .module-card h4 {
+#pestana-basico .module-card h4,
+#pestana-detectores-agua .module-card h4 {
   margin: 0 0 0.4rem;
   line-height: 1.3;
 }
 
-#pestana-basico .module-card p {
+#pestana-basico .module-card p,
+#pestana-detectores-agua .module-card p {
   margin: 0.35rem 0 0;
 }
 
@@ -1145,7 +1153,7 @@ h3 {
   background: linear-gradient(180deg, #f8fbff 0%, #f3f8fd 100%);
   border-bottom: 1px solid #d5e1ed;
   scrollbar-gutter: stable;
-  overscroll-behavior: contain;
+  overscroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
 }
 

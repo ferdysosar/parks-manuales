@@ -527,9 +527,12 @@
       renderCalendar();
     });
 
-    document.addEventListener("click", function (event) {
+    document.addEventListener("pointerdown", function (event) {
       if (calendarBox.hidden) return;
-      if (!filterSimulator.contains(event.target)) {
+      const target = event.target;
+      const clickedDateInput = target === startInput || target === endInput;
+      const clickedInsideCalendar = calendarBox.contains(target);
+      if (!clickedDateInput && !clickedInsideCalendar) {
         hideCalendar();
       }
     });
