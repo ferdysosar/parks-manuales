@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Power BI (Dashboard) | PARKS Ingeniería</title>
   <meta name="description" content="Manual general de Power BI del portal de guías de PARKS Ingeniería SA.">
+  <script>
+    (function () {
+      try {
+        var key = "parks-theme";
+        var saved = localStorage.getItem(key);
+        var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (_error) {}
+    })();
+  </script>
   <link rel="icon" type="image/png" href="assets/branding/logo-parks.png">
   <link rel="apple-touch-icon" href="assets/branding/logo-parks.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +46,9 @@
         <a href="#indice">Índice</a>
         <a href="#ruta-recomendada">Ruta recomendada</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle aria-label="Activar modo oscuro" title="Cambiar tema">
+        🌙
+      </button>
     </div>
   </header>
 
@@ -863,3 +877,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+

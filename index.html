@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PARKS Ingeniería | Manuales de Usuario</title>
   <meta name="description" content="Portal de manuales y guías de uso de PARKS Ingeniería SA para clientes y usuarios.">
+  <script>
+    (function () {
+      try {
+        var key = "parks-theme";
+        var saved = localStorage.getItem(key);
+        var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (_error) {}
+    })();
+  </script>
   <link rel="icon" type="image/png" href="assets/branding/logo-parks.png">
   <link rel="apple-touch-icon" href="assets/branding/logo-parks.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +46,9 @@
         <a href="#uso-portal">Cómo usar</a>
         <a href="#guia-disponible">Guía disponible</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle aria-label="Activar modo oscuro" title="Cambiar tema">
+        🌙
+      </button>
     </div>
   </header>
 
@@ -87,7 +101,7 @@
             </p>
           </article>
 
-          <article class="feature-card" aria-labelledby="area-powerbi">
+          <article class="feature-card feature-card--interactive" aria-labelledby="area-powerbi">
             <div class="card-top">
               <div class="card-top-brand">
                 <span class="area-symbol" aria-hidden="true">BI</span>
@@ -102,7 +116,8 @@
             <p>
               Manual general para comprender navegación, filtros e interpretación de dashboards.
             </p>
-            <a class="card-link" href="power-bi.html">Ver manual</a>
+            <p class="card-link card-link--label" aria-hidden="true">Ver manual</p>
+            <a class="feature-card-overlay-link" href="power-bi.html" aria-label="Abrir manual de Power BI"></a>
           </article>
 
           <article class="feature-card" aria-labelledby="area-sgn">
@@ -196,3 +211,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+
