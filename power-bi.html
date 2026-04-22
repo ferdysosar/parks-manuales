@@ -27,7 +27,7 @@
           <span class="brand-subtitle">Manuales de Usuario</span>
         </span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="doc-sidebar" data-menu-toggle data-doc-drawer-toggle>
         Menú
       </button>
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal" data-main-nav>
@@ -67,8 +67,11 @@
 
     <section class="section doc-layout" id="indice">
       <div class="container doc-grid">
-        <aside class="doc-sidebar" aria-label="Índice interno">
-          <h2>Índice de contenidos</h2>
+        <aside class="doc-sidebar" id="doc-sidebar" aria-label="Índice interno" data-doc-sidebar>
+          <div class="doc-sidebar-head">
+            <h2>Índice de contenidos</h2>
+            <button class="doc-drawer-close" type="button" aria-label="Cerrar índice" data-doc-drawer-close>✕</button>
+          </div>
           <nav class="doc-nav" aria-label="Navegación por secciones" data-doc-nav>
             <a href="#introduccion">1. Introducción general</a>
             <a href="#navegacion">2. Cómo navegar un dashboard</a>
@@ -838,6 +841,7 @@
           </section>
         </article>
       </div>
+      <button class="doc-drawer-overlay" type="button" aria-label="Cerrar índice" data-doc-drawer-overlay hidden></button>
     </section>
   </main>
 
@@ -847,6 +851,10 @@
       <p>Portal de manuales y guías de uso para clientes y usuarios.</p>
     </div>
   </footer>
+  <div class="scroll-progress-rail" aria-hidden="true" data-scroll-progress>
+    <span class="scroll-progress-bar" data-scroll-progress-bar></span>
+    <span class="scroll-progress-thumb" data-scroll-progress-thumb></span>
+  </div>
 
   <button class="back-to-top" type="button" aria-label="Volver arriba" data-back-top>
     ↑

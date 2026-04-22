@@ -3,8 +3,12 @@
   const mainNav = document.querySelector("[data-main-nav]");
   const backTopButton = document.querySelector("[data-back-top]");
   const docNav = document.querySelector("[data-doc-nav]");
+  const docSidebar = document.querySelector("[data-doc-sidebar]");
+  const docDrawerToggle = document.querySelector("[data-doc-drawer-toggle]");
+  const docDrawerClose = document.querySelector("[data-doc-drawer-close]");
+  const docDrawerOverlay = document.querySelector("[data-doc-drawer-overlay]");
 
-  if (menuButton && mainNav) {
+  if (menuButton && mainNav && !menuButton.hasAttribute("data-doc-drawer-toggle")) {
     menuButton.addEventListener("click", function () {
       const isOpen = mainNav.classList.toggle("is-open");
       menuButton.setAttribute("aria-expanded", String(isOpen));
@@ -16,6 +20,143 @@
         menuButton.setAttribute("aria-expanded", "false");
       });
     });
+  }
+
+  const scrollProgress = document.querySelector("[data-scroll-progress]");
+  const scrollProgressBar = document.querySelector("[data-scroll-progress-bar]");
+  const scrollProgressThumb = document.querySelector("[data-scroll-progress-thumb]");
+  if (scrollProgress && scrollProgressBar && scrollProgressThumb) {
+    let hideTimer = null;
+    let rafId = 0;
+    let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const responsiveScrollQuery = window.matchMedia("(max-width: 980px)");
+    let draggingPointerId = null;
+
+    const clamp01 = function (value) {
+      return Math.min(1, Math.max(0, value));
+    };
+
+    const showProgress = function () {
+      if (!responsiveScrollQuery.matches) return;
+      scrollProgress.classList.add("is-visible");
+      if (hideTimer) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    };
+
+    const scheduleHide = function () {
+      if (!responsiveScrollQuery.matches) return;
+      if (draggingPointerId !== null) return;
+      if (hideTimer) window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(function () {
+        scrollProgress.classList.remove("is-visible");
+      }, 700);
+    };
+
+    const scrollToRatio = function (ratio, smooth) {
+      const doc = document.documentElement;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      window.scrollTo({
+        top: clamp01(ratio) * maxScroll,
+        behavior: smooth && !reducedMotion ? "smooth" : "auto"
+      });
+    };
+
+    const getRatioFromClientY = function (clientY) {
+      const rect = scrollProgress.getBoundingClientRect();
+      if (rect.height <= 0) return 0;
+      return clamp01((clientY - rect.top) / rect.height);
+    };
+
+    const drawScrollProgress = function () {
+      rafId = 0;
+      if (!responsiveScrollQuery.matches) {
+        scrollProgress.classList.remove("is-visible", "is-dragging");
+        return;
+      }
+      const doc = document.documentElement;
+      const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const progress = clamp01(window.scrollY / maxScroll);
+      scrollProgressBar.style.transform = "translateX(-50%) scaleY(" + progress + ")";
+      scrollProgressThumb.style.top = progress * 100 + "%";
+
+      showProgress();
+      scheduleHide();
+    };
+
+    const requestDraw = function () {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(drawScrollProgress);
+    };
+
+    window.addEventListener("scroll", requestDraw, { passive: true });
+    window.addEventListener("resize", requestDraw);
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (typeof reducedMotionQuery.addEventListener === "function") {
+      reducedMotionQuery.addEventListener("change", function (event) {
+        reducedMotion = event.matches;
+      });
+    }
+
+    if (typeof responsiveScrollQuery.addEventListener === "function") {
+      responsiveScrollQuery.addEventListener("change", function (event) {
+        if (!event.matches) {
+          draggingPointerId = null;
+          scrollProgress.classList.remove("is-visible", "is-dragging");
+          if (hideTimer) {
+            window.clearTimeout(hideTimer);
+            hideTimer = null;
+          }
+        }
+        requestDraw();
+      });
+    }
+
+    const onPointerMove = function (event) {
+      if (draggingPointerId === null || event.pointerId !== draggingPointerId) return;
+      event.preventDefault();
+      const ratio = getRatioFromClientY(event.clientY);
+      scrollToRatio(ratio, false);
+      requestDraw();
+    };
+
+    const stopDragging = function (event) {
+      if (draggingPointerId === null || event.pointerId !== draggingPointerId) return;
+      draggingPointerId = null;
+      scrollProgress.classList.remove("is-dragging");
+      if (typeof scrollProgress.releasePointerCapture === "function") {
+        try {
+          scrollProgress.releasePointerCapture(event.pointerId);
+        } catch (_error) {}
+      }
+      scheduleHide();
+    };
+
+    scrollProgress.addEventListener("pointerdown", function (event) {
+      if (!responsiveScrollQuery.matches) return;
+      event.preventDefault();
+      draggingPointerId = event.pointerId;
+      scrollProgress.classList.add("is-dragging");
+      if (typeof scrollProgress.setPointerCapture === "function") {
+        try {
+          scrollProgress.setPointerCapture(event.pointerId);
+        } catch (_error) {}
+      }
+      const ratio = getRatioFromClientY(event.clientY);
+      scrollToRatio(ratio, false);
+      showProgress();
+      requestDraw();
+    });
+
+    scrollProgress.addEventListener("pointermove", onPointerMove);
+    scrollProgress.addEventListener("pointerup", stopDragging);
+    scrollProgress.addEventListener("pointercancel", stopDragging);
+    scrollProgress.addEventListener("pointerleave", function () {
+      scheduleHide();
+    });
+
+    requestDraw();
   }
 
   if (backTopButton) {
@@ -46,7 +187,62 @@
       .filter(Boolean);
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const drawerMedia = window.matchMedia("(max-width: 980px)");
     let activeId = null;
+    let lastDrawerTrigger = null;
+
+    const isDrawerMode = function () {
+      return drawerMedia.matches;
+    };
+
+    const setDrawerOpen = function (open, restoreFocus) {
+      if (!docDrawerToggle || !docSidebar || !docDrawerOverlay) return;
+      document.body.classList.toggle("doc-drawer-open", open);
+      docDrawerToggle.setAttribute("aria-expanded", String(open));
+      docDrawerOverlay.hidden = !open;
+      if (open) {
+        lastDrawerTrigger = document.activeElement;
+        if (docDrawerClose) docDrawerClose.focus();
+      } else if (restoreFocus && lastDrawerTrigger && typeof lastDrawerTrigger.focus === "function") {
+        lastDrawerTrigger.focus();
+      }
+    };
+
+    const closeDrawer = function (restoreFocus) {
+      setDrawerOpen(false, restoreFocus !== false);
+    };
+
+    const openDrawer = function () {
+      setDrawerOpen(true, true);
+    };
+
+    if (docDrawerToggle && docSidebar && docDrawerOverlay) {
+      docDrawerToggle.addEventListener("click", function () {
+        if (document.body.classList.contains("doc-drawer-open")) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+    }
+
+    if (docDrawerClose) {
+      docDrawerClose.addEventListener("click", function () {
+        closeDrawer();
+      });
+    }
+
+    if (docDrawerOverlay) {
+      docDrawerOverlay.addEventListener("click", function () {
+        closeDrawer();
+      });
+    }
+
+    if (typeof drawerMedia.addEventListener === "function") {
+      drawerMedia.addEventListener("change", function () {
+        closeDrawer();
+      });
+    }
 
     const ensureLinkVisible = function (link) {
       const containerRect = docNav.getBoundingClientRect();
@@ -78,6 +274,23 @@
         }
       });
     };
+
+    links.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+          block: "start"
+        });
+        if (isDrawerMode()) {
+          closeDrawer(false);
+        }
+      });
+    });
 
     if (sections.length > 0 && "IntersectionObserver" in window) {
       const visibility = new Map();
@@ -124,6 +337,12 @@
 
       setActiveLink(sections[0].getAttribute("id"));
     }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && document.body.classList.contains("doc-drawer-open")) {
+        closeDrawer();
+      }
+    });
   }
 
   const filterSimulator = document.querySelector("[data-filter-simulator]");
