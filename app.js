@@ -12,11 +12,6 @@
   if (themeToggles.length > 0) {
     const THEME_KEY = "parks-theme";
     const root = document.documentElement;
-    const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const getSystemTheme = function () {
-      return prefersDarkQuery.matches ? "dark" : "light";
-    };
 
     const getStoredTheme = function () {
       try {
@@ -42,12 +37,12 @@
       updateThemeControls(theme);
     };
 
-    const initialTheme = getStoredTheme() || getSystemTheme();
+    const initialTheme = getStoredTheme() || "light";
     applyTheme(initialTheme);
 
     themeToggles.forEach(function (button) {
       button.addEventListener("click", function () {
-        const current = root.getAttribute("data-theme") || getSystemTheme();
+        const current = root.getAttribute("data-theme") || "light";
         const next = current === "dark" ? "light" : "dark";
         applyTheme(next);
         try {
@@ -55,13 +50,6 @@
         } catch (_error) {}
       });
     });
-
-    if (typeof prefersDarkQuery.addEventListener === "function") {
-      prefersDarkQuery.addEventListener("change", function () {
-        if (getStoredTheme()) return;
-        applyTheme(getSystemTheme());
-      });
-    }
   }
 
   if (menuButton && mainNav && !menuButton.hasAttribute("data-doc-drawer-toggle")) {

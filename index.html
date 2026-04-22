@@ -10,8 +10,7 @@
       try {
         var key = "parks-theme";
         var saved = localStorage.getItem(key);
-        var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        var theme = saved || (systemDark ? "dark" : "light");
+        var theme = (saved === "dark" || saved === "light") ? saved : "light";
         document.documentElement.setAttribute("data-theme", theme);
       } catch (_error) {}
     })();
