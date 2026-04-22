@@ -7,6 +7,62 @@
   const docDrawerToggle = document.querySelector("[data-doc-drawer-toggle]");
   const docDrawerClose = document.querySelector("[data-doc-drawer-close]");
   const docDrawerOverlay = document.querySelector("[data-doc-drawer-overlay]");
+  const themeToggles = Array.from(document.querySelectorAll("[data-theme-toggle]"));
+
+  if (themeToggles.length > 0) {
+    const THEME_KEY = "parks-theme";
+    const root = document.documentElement;
+    const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const getSystemTheme = function () {
+      return prefersDarkQuery.matches ? "dark" : "light";
+    };
+
+    const getStoredTheme = function () {
+      try {
+        const saved = localStorage.getItem(THEME_KEY);
+        return saved === "dark" || saved === "light" ? saved : null;
+      } catch (_error) {
+        return null;
+      }
+    };
+
+    const updateThemeControls = function (theme) {
+      const isDark = theme === "dark";
+      themeToggles.forEach(function (button) {
+        button.setAttribute("aria-pressed", String(isDark));
+        button.setAttribute("aria-label", isDark ? "Activar modo claro" : "Activar modo oscuro");
+        button.title = isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
+        button.textContent = isDark ? "☀️" : "🌙";
+      });
+    };
+
+    const applyTheme = function (theme) {
+      root.setAttribute("data-theme", theme);
+      updateThemeControls(theme);
+    };
+
+    const initialTheme = getStoredTheme() || getSystemTheme();
+    applyTheme(initialTheme);
+
+    themeToggles.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const current = root.getAttribute("data-theme") || getSystemTheme();
+        const next = current === "dark" ? "light" : "dark";
+        applyTheme(next);
+        try {
+          localStorage.setItem(THEME_KEY, next);
+        } catch (_error) {}
+      });
+    });
+
+    if (typeof prefersDarkQuery.addEventListener === "function") {
+      prefersDarkQuery.addEventListener("change", function () {
+        if (getStoredTheme()) return;
+        applyTheme(getSystemTheme());
+      });
+    }
+  }
 
   if (menuButton && mainNav && !menuButton.hasAttribute("data-doc-drawer-toggle")) {
     menuButton.addEventListener("click", function () {
@@ -21,6 +77,247 @@
       });
     });
   }
+
+  if (mainNav) {
+    const navLinks = Array.from(mainNav.querySelectorAll("a[href^='#']"));
+    const header = document.querySelector(".site-header");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let activeTargetId = null;
+    let sectionRaf = 0;
+    let highlightTimer = null;
+    let anchorScrollRaf = 0;
+
+    const getAnchorOffset = function () {
+      const headerHeight = header ? Math.round(header.getBoundingClientRect().height) : 72;
+      return headerHeight + 16;
+    };
+
+    const syncAnchorOffsetVar = function () {
+      document.documentElement.style.setProperty("--anchor-offset", getAnchorOffset() + "px");
+    };
+
+    const setTopNavActive = function (id) {
+      if (!id || id === activeTargetId) return;
+      activeTargetId = id;
+      navLinks.forEach(function (link) {
+        const isActive = link.getAttribute("href") === "#" + id;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const highlightAnchorTarget = function (target) {
+      if (!target) return;
+      target.classList.add("is-anchor-target");
+      if (highlightTimer) {
+        window.clearTimeout(highlightTimer);
+      }
+      highlightTimer = window.setTimeout(function () {
+        target.classList.remove("is-anchor-target");
+      }, 1350);
+    };
+
+    const stopAnchorAnimation = function () {
+      if (!anchorScrollRaf) return;
+      window.cancelAnimationFrame(anchorScrollRaf);
+      anchorScrollRaf = 0;
+    };
+
+    const easeInOutQuart = function (value) {
+      return value < 0.5
+        ? 8 * Math.pow(value, 4)
+        : 1 - Math.pow(-2 * value + 2, 4) / 2;
+    };
+
+    const animateScrollTo = function (targetTop, smooth, done) {
+      stopAnchorAnimation();
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const finalTop = Math.min(maxScroll, Math.max(0, Math.round(targetTop)));
+      const startTop = window.scrollY;
+      const distance = finalTop - startTop;
+
+      if (!smooth || prefersReducedMotion.matches || Math.abs(distance) < 8) {
+        window.scrollTo({ top: finalTop, behavior: "auto" });
+        if (typeof done === "function") done();
+        return;
+      }
+
+      const duration = Math.min(950, Math.max(480, Math.abs(distance) * 0.8));
+      let startTime = 0;
+
+      const step = function (timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        const eased = easeInOutQuart(progress);
+        window.scrollTo({ top: startTop + distance * eased, behavior: "auto" });
+
+        if (progress < 1) {
+          anchorScrollRaf = window.requestAnimationFrame(step);
+        } else {
+          anchorScrollRaf = 0;
+          if (typeof done === "function") done();
+        }
+      };
+
+      anchorScrollRaf = window.requestAnimationFrame(step);
+    };
+
+    const scrollToAnchor = function (target, smooth) {
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - getAnchorOffset();
+      animateScrollTo(Math.max(0, top), smooth, function () {
+        highlightAnchorTarget(target);
+      });
+      if (target.id) {
+        setTopNavActive(target.id);
+      }
+    };
+
+    navLinks.forEach(function (link) {
+      const href = link.getAttribute("href");
+      if (!href || href.length < 2) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (mainNav.classList.contains("is-open")) {
+          mainNav.classList.remove("is-open");
+          if (menuButton) menuButton.setAttribute("aria-expanded", "false");
+        }
+        scrollToAnchor(target, true);
+        if (window.location.hash !== href) {
+          history.replaceState(null, "", href);
+        }
+      });
+    });
+
+    const anchorSections = navLinks
+      .map(function (link) {
+        const href = link.getAttribute("href");
+        return href && href.startsWith("#") ? document.querySelector(href) : null;
+      })
+      .filter(Boolean);
+
+    const updateTopNavActiveByScroll = function () {
+      sectionRaf = 0;
+      if (anchorSections.length === 0) return;
+      const probe = window.scrollY + getAnchorOffset() + 8;
+      let current = anchorSections[0];
+      anchorSections.forEach(function (section) {
+        if (section.offsetTop <= probe) current = section;
+      });
+      if (current && current.id) setTopNavActive(current.id);
+    };
+
+    const scheduleTopNavUpdate = function () {
+      if (sectionRaf) return;
+      sectionRaf = window.requestAnimationFrame(updateTopNavActiveByScroll);
+    };
+
+    syncAnchorOffsetVar();
+    scheduleTopNavUpdate();
+
+    window.addEventListener("scroll", scheduleTopNavUpdate, { passive: true });
+    window.addEventListener("wheel", stopAnchorAnimation, { passive: true });
+    window.addEventListener("keydown", function (event) {
+      if (
+        event.key === "ArrowDown" ||
+        event.key === "ArrowUp" ||
+        event.key === "PageDown" ||
+        event.key === "PageUp" ||
+        event.key === "Home" ||
+        event.key === "End" ||
+        event.key === " "
+      ) {
+        stopAnchorAnimation();
+      }
+    });
+    window.addEventListener("resize", function () {
+      syncAnchorOffsetVar();
+      scheduleTopNavUpdate();
+    });
+
+    window.addEventListener("load", function () {
+      syncAnchorOffsetVar();
+      const hash = window.location.hash;
+      if (hash && hash.length > 1) {
+        const target = document.querySelector(hash);
+        if (target) {
+          window.requestAnimationFrame(function () {
+            scrollToAnchor(target, false);
+          });
+        }
+      }
+      scheduleTopNavUpdate();
+    });
+  }
+
+  const setupPageTransition = function () {
+    const body = document.body;
+    if (!body) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (prefersReducedMotion.matches) {
+      body.classList.remove("is-page-entering", "is-page-leaving", "is-page-ready");
+      return;
+    }
+
+    body.classList.add("page-transition-enabled", "is-page-entering");
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        body.classList.remove("is-page-entering");
+        body.classList.add("is-page-ready");
+      });
+    });
+
+    document.addEventListener("click", function (event) {
+      const link = event.target.closest("a[href]");
+      if (!link) return;
+      if (event.defaultPrevented) return;
+      if (link.target && link.target !== "_self") return;
+      if (link.hasAttribute("download")) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+
+      let url;
+      try {
+        url = new URL(link.href, window.location.href);
+      } catch (_error) {
+        return;
+      }
+
+      if (url.origin !== window.location.origin) return;
+
+      const experimentalPathPattern = /\/experimental\//i;
+      if (
+        !experimentalPathPattern.test(window.location.pathname) ||
+        !experimentalPathPattern.test(url.pathname)
+      ) {
+        return;
+      }
+
+      const isSamePage =
+        url.pathname === window.location.pathname &&
+        url.search === window.location.search;
+      if (isSamePage) return;
+
+      event.preventDefault();
+      body.classList.remove("is-page-entering");
+      body.classList.add("is-page-leaving");
+      window.setTimeout(function () {
+        window.location.href = url.href;
+      }, 240);
+    });
+  };
+
+  setupPageTransition();
 
   const scrollProgress = document.querySelector("[data-scroll-progress]");
   const scrollProgressBar = document.querySelector("[data-scroll-progress-bar]");
@@ -345,6 +642,36 @@
     });
   }
 
+  const revealTargets = Array.from(
+    document.querySelectorAll(
+      ".content-block, .feature-card, .guide-panel, .usage-card, .roadmap-item, .visual-guide-block, .hero-main, .hero-panel, .powerbi-hero-brand"
+    )
+  );
+  if (revealTargets.length > 0 && "IntersectionObserver" in window) {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      revealTargets.forEach(function (el) {
+        el.classList.add("is-visible");
+      });
+    } else {
+      const observer = new IntersectionObserver(
+        function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -12% 0px", threshold: 0.08 }
+      );
+
+      revealTargets.forEach(function (el) {
+        el.classList.add("reveal-on-scroll");
+        observer.observe(el);
+      });
+    }
+  }
+
   const filterSimulator = document.querySelector("[data-filter-simulator]");
   if (filterSimulator) {
     const modeSelect = filterSimulator.querySelector("[data-period-mode]");
@@ -651,6 +978,7 @@
 
       const monthStart = utcDate(calendarMonth.getUTCFullYear(), calendarMonth.getUTCMonth(), 1);
       const gridStart = startOfWeekMonday(monthStart);
+      const todayDate = clampDate(toUtcDay(new Date()));
       calendarGrid.innerHTML = "";
 
       for (let i = 0; i < 42; i += 1) {
@@ -672,6 +1000,10 @@
         }
         if (date > subStart && date < subEnd) {
           button.classList.add("is-in-range");
+        }
+        if (date.getTime() === todayDate.getTime()) {
+          button.classList.add("is-today");
+          button.setAttribute("aria-label", "Hoy, " + String(date.getUTCDate()));
         }
 
         button.addEventListener("click", function () {
