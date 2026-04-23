@@ -928,9 +928,9 @@ h3 {
 .scroll-progress-rail {
   display: none;
   position: fixed;
-  right: 10px;
+  right: 14px;
   top: 14vh;
-  width: 22px;
+  width: 18px;
   height: 62vh;
   border-radius: 999px;
   background: transparent;
@@ -938,7 +938,7 @@ h3 {
   z-index: 125;
   pointer-events: none;
   cursor: pointer;
-  touch-action: none;
+  touch-action: pan-y;
   opacity: 0;
   transform: translateX(4px);
   transition: opacity 220ms ease, transform 220ms ease;
@@ -987,6 +987,7 @@ h3 {
   border: 1px solid #2b5f8f;
   box-shadow: 0 2px 8px rgba(13, 47, 79, 0.2);
   pointer-events: auto;
+  touch-action: none;
 }
 
 .scroll-progress-rail.is-dragging {
@@ -2025,10 +2026,10 @@ h3 {
   }
 
   .scroll-progress-rail {
-    right: 8px;
-    width: 20px;
+    right: 12px;
+    width: 18px;
     top: 13vh;
-    height: 64vh;
+    height: 60vh;
   }
 
   .nav-compact-grid {
@@ -2185,9 +2186,9 @@ h3 {
   }
 
   .scroll-progress-rail {
-    right: 6px;
+    right: 10px;
     top: 12vh;
-    height: 66vh;
+    height: 58vh;
   }
 }
 

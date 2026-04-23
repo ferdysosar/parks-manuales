@@ -316,13 +316,26 @@
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const responsiveScrollQuery = window.matchMedia("(max-width: 980px)");
     let draggingPointerId = null;
+    let pendingTap = null;
 
     const clamp01 = function (value) {
       return Math.min(1, Math.max(0, value));
     };
 
+    const isResponsiveActive = function () {
+      return responsiveScrollQuery.matches;
+    };
+
+    const isThumbTarget = function (target) {
+      return target === scrollProgressThumb || scrollProgressThumb.contains(target);
+    };
+
+    const clearPendingTap = function () {
+      pendingTap = null;
+    };
+
     const showProgress = function () {
-      if (!responsiveScrollQuery.matches) return;
+      if (!isResponsiveActive()) return;
       scrollProgress.classList.add("is-visible");
       if (hideTimer) {
         window.clearTimeout(hideTimer);
@@ -331,7 +344,7 @@
     };
 
     const scheduleHide = function () {
-      if (!responsiveScrollQuery.matches) return;
+      if (!isResponsiveActive()) return;
       if (draggingPointerId !== null) return;
       if (hideTimer) window.clearTimeout(hideTimer);
       hideTimer = window.setTimeout(function () {
@@ -356,7 +369,9 @@
 
     const drawScrollProgress = function () {
       rafId = 0;
-      if (!responsiveScrollQuery.matches) {
+      if (!isResponsiveActive()) {
+        clearPendingTap();
+        draggingPointerId = null;
         scrollProgress.classList.remove("is-visible", "is-dragging");
         return;
       }
@@ -387,6 +402,7 @@
     if (typeof responsiveScrollQuery.addEventListener === "function") {
       responsiveScrollQuery.addEventListener("change", function (event) {
         if (!event.matches) {
+          clearPendingTap();
           draggingPointerId = null;
           scrollProgress.classList.remove("is-visible", "is-dragging");
           if (hideTimer) {
@@ -399,45 +415,87 @@
     }
 
     const onPointerMove = function (event) {
-      if (draggingPointerId === null || event.pointerId !== draggingPointerId) return;
-      event.preventDefault();
-      const ratio = getRatioFromClientY(event.clientY);
-      scrollToRatio(ratio, false);
-      requestDraw();
+      if (draggingPointerId !== null && event.pointerId === draggingPointerId) {
+        event.preventDefault();
+        const ratio = getRatioFromClientY(event.clientY);
+        scrollToRatio(ratio, false);
+        requestDraw();
+        return;
+      }
+
+      if (!pendingTap || event.pointerId !== pendingTap.pointerId) return;
+      const movedX = Math.abs(event.clientX - pendingTap.startX);
+      const movedY = Math.abs(event.clientY - pendingTap.startY);
+      if (movedX > 12 || movedY > 12) {
+        clearPendingTap();
+      }
     };
 
     const stopDragging = function (event) {
-      if (draggingPointerId === null || event.pointerId !== draggingPointerId) return;
-      draggingPointerId = null;
-      scrollProgress.classList.remove("is-dragging");
-      if (typeof scrollProgress.releasePointerCapture === "function") {
-        try {
-          scrollProgress.releasePointerCapture(event.pointerId);
-        } catch (_error) {}
+      if (draggingPointerId !== null && event.pointerId === draggingPointerId) {
+        draggingPointerId = null;
+        scrollProgress.classList.remove("is-dragging");
+        if (typeof scrollProgress.releasePointerCapture === "function") {
+          try {
+            scrollProgress.releasePointerCapture(event.pointerId);
+          } catch (_error) {}
+        }
+        scheduleHide();
+        return;
       }
+
+      if (!pendingTap || event.pointerId !== pendingTap.pointerId) return;
+      if (event.type === "pointercancel") {
+        clearPendingTap();
+        scheduleHide();
+        return;
+      }
+      const elapsed = performance.now() - pendingTap.startTime;
+      const movedX = Math.abs(event.clientX - pendingTap.startX);
+      const movedY = Math.abs(event.clientY - pendingTap.startY);
+
+      if (elapsed < 350 && movedX < 12 && movedY < 12) {
+        const ratio = getRatioFromClientY(event.clientY);
+        scrollToRatio(ratio, !reducedMotion);
+        requestDraw();
+      }
+
+      clearPendingTap();
       scheduleHide();
     };
 
     scrollProgress.addEventListener("pointerdown", function (event) {
-      if (!responsiveScrollQuery.matches) return;
-      event.preventDefault();
-      draggingPointerId = event.pointerId;
-      scrollProgress.classList.add("is-dragging");
-      if (typeof scrollProgress.setPointerCapture === "function") {
-        try {
-          scrollProgress.setPointerCapture(event.pointerId);
-        } catch (_error) {}
+      if (!isResponsiveActive()) return;
+
+      if (isThumbTarget(event.target)) {
+        event.preventDefault();
+        clearPendingTap();
+        draggingPointerId = event.pointerId;
+        scrollProgress.classList.add("is-dragging");
+        if (typeof scrollProgress.setPointerCapture === "function") {
+          try {
+            scrollProgress.setPointerCapture(event.pointerId);
+          } catch (_error) {}
+        }
+        showProgress();
+        requestDraw();
+        return;
       }
-      const ratio = getRatioFromClientY(event.clientY);
-      scrollToRatio(ratio, false);
+
+      pendingTap = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        startTime: performance.now()
+      };
       showProgress();
-      requestDraw();
     });
 
     scrollProgress.addEventListener("pointermove", onPointerMove);
     scrollProgress.addEventListener("pointerup", stopDragging);
     scrollProgress.addEventListener("pointercancel", stopDragging);
     scrollProgress.addEventListener("pointerleave", function () {
+      clearPendingTap();
       scheduleHide();
     });
 
